@@ -34,44 +34,32 @@ program
   .version(version)
   .arguments('<componentName>')
   .option(
-    '-t, --type <componentType>',
-    'Type of React component to generate (default: "functional")',
-    /^(class|pure-class|functional)$/i,
-    config.type
-  )
-  .option(
     '-d, --dir <pathToDirectory>',
     'Path to the "components" directory (default: "src/components")',
-    config.dir
-  )
-  .option(
-    '-x, --extension <fileExtension>',
-    'Which file extension to use for the component (default: "js")',
-    config.extension
+    config.dir,
   )
   .parse(process.argv);
 
 const [componentName] = program.args;
 
-// Find the path to the selected template file.
-const templatePath = `./templates/${program.type}.js`;
+// Templates
+const templateComponentPath = './templates/component.js';
+const templateDataPath = './templates/data.js';
+const templateIndexPath = './templates/index.js';
 
-// Get all of our file paths worked out, for the user's project.
+// Target files
 const componentDir = `${program.dir}/${componentName}`;
-const filePath = `${componentDir}/${componentName}.${program.extension}`;
+const componentPath = `${componentDir}/${componentName}.js`;
+const dataPath = `${componentDir}/data.js`;
 const indexPath = `${componentDir}/index.js`;
 
-// Our index template is super straightforward, so we'll just inline it for now.
-const indexTemplate = prettify(`\
-export { default } from './${componentName}';
-`);
-
-logIntro({ name: componentName, dir: componentDir, type: program.type });
+// Logging ...
+logIntro({ name: componentName, dir: componentDir });
 
 // Check if componentName is provided
 if (!componentName) {
   logError(
-    `Sorry, you need to specify a name for your component like this: new-component <name>`
+    `Sorry, you need to specify a name for your component like this: new-component <name>`,
   );
   process.exit(0);
 }
@@ -80,7 +68,7 @@ if (!componentName) {
 const fullPathToParentDir = path.resolve(program.dir);
 if (!fs.existsSync(fullPathToParentDir)) {
   logError(
-    `Sorry, you need to create a parent "components" directory.\n(new-component is looking for a directory at ${program.dir}).`
+    `Sorry, you need to create a parent "components" directory.\n(new-component is looking for a directory at ${program.dir}).`,
   );
   process.exit(0);
 }
@@ -89,41 +77,60 @@ if (!fs.existsSync(fullPathToParentDir)) {
 const fullPathToComponentDir = path.resolve(componentDir);
 if (fs.existsSync(fullPathToComponentDir)) {
   logError(
-    `Looks like this component already exists! There's already a component at ${componentDir}.\nPlease delete this directory and try again.`
+    `Looks like this component already exists! There's already a component at ${componentDir}.\nPlease delete this directory and try again.`,
   );
   process.exit(0);
 }
 
-// Start by creating the directory that our component lives in.
+// Create the files one by one
 mkDirPromise(componentDir)
-  .then(() => readFilePromiseRelative(templatePath))
-  .then((template) => {
+  .then(() => readFilePromiseRelative(templateComponentPath))
+  .then(template => {
     logItemCompletion('Directory created.');
     return template;
   })
-  .then((template) =>
+  .then(template =>
     // Replace our placeholders with real data (so far, just the component name)
-    template.replace(/COMPONENT_NAME/g, componentName)
+    template.replace(/COMPONENT_NAME/g, componentName),
   )
-  .then((template) =>
+  .then(template =>
     // Format it using prettier, to ensure style consistency, and write to file.
-    writeFilePromise(filePath, prettify(template))
+    writeFilePromise(componentPath, prettify(template)),
   )
-  .then((template) => {
-    logItemCompletion('Component built and saved to disk.');
+  .then(template => {
+    logItemCompletion('Component created.');
     return template;
   })
-  .then((template) =>
-    // We also need the `index.js` file, which allows easy importing.
-    writeFilePromise(indexPath, prettify(indexTemplate))
+  .then(() => readFilePromiseRelative(templateDataPath))
+  .then(template =>
+    // Replace our placeholders with real data (so far, just the component name)
+    template.replace(/COMPONENT_NAME/g, componentName),
   )
-  .then((template) => {
-    logItemCompletion('Index file built and saved to disk.');
+  .then(template =>
+    // Format it using prettier, to ensure style consistency, and write to file.
+    writeFilePromise(dataPath, prettify(template)),
+  )
+  .then(template => {
+    logItemCompletion('Data created.');
     return template;
   })
-  .then((template) => {
+
+  .then(() => readFilePromiseRelative(templateIndexPath))
+  .then(template =>
+    // Replace our placeholders with real data (so far, just the component name)
+    template.replace(/COMPONENT_NAME/g, componentName),
+  )
+  .then(template =>
+    // Format it using prettier, to ensure style consistency, and write to file.
+    writeFilePromise(indexPath, prettify(template)),
+  )
+  .then(template => {
+    logItemCompletion('Index created.');
+    return template;
+  })
+  .then(template => {
     logConclusion();
   })
-  .catch((err) => {
+  .catch(err => {
     console.error(err);
   });

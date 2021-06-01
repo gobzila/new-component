@@ -1,34 +1,26 @@
 {
-  "name": "new-component",
-  "version": "2.0.0",
-  "description": "CLI for creating new React components",
-  "homepage": "https://github.com/joshwcomeau/new-component",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/joshwcomeau/new-component"
-  },
-  "bugs": {
-    "url": "https://github.com/joshwcomeau/new-component/issues"
-  },
+  "name": "@gobzila/new-component",
+  "version": "1.0.0",
+  "description": "CLI for creating React or React Native components",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "react",
-    "reactjs",
-    "cli",
+    "react native",
     "component",
     "boilerplate"
   ],
-  "author": "Joshua Comeau",
+  "author": "Gabriel Borsan",
   "license": "MIT",
   "bin": {
     "new-component": "./src/index.js"
   },
   "dependencies": {
-    "chalk": "^2.4.1",
-    "commander": "^2.15.1",
-    "prettier": "1.5.3"
+    "chalk": "2.1.0",
+    "clsx": "^1.1.0",
+    "commander": "2.11.0",
+    "prettier": "^1.19.1"
   }
 }
