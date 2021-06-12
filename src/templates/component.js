@@ -4,17 +4,17 @@
 import React from 'react';
 
 /**
- * Imports components and hooks
+ * Import components and hooks
  */
 
 /**
- * Imports others
+ * Import others
  */
 
 /**
- * Imports data
+ * Import data
  */
-import { propTypes, defaultProps } from './data';
+import { propTypes, defaultProps } from './props';
 
 /**
  * Displays the component

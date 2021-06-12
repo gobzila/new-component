@@ -43,15 +43,15 @@ In `src/components/TestComponent`:
 import React from 'react';
 
 /**
- * Imports other components and hooks
+ * Import other components and hooks
  */
 
 /**
- * Imports others
+ * Import others
  */
 
 /**
- * Imports data
+ * Import data
  */
 import { propTypes, defaultProps } from './data';
 
