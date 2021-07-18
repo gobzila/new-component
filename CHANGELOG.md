@@ -9,7 +9,19 @@ Headers are one of:
 
 - `Added`, `Changed`, `Removed` or `Fixed`.
 
-### [1.0] - 01-06-2021
+### [3.0.0]
+
+#### Changed
+
+- Update templates
+
+### [2.0.0]
+
+#### Added
+
+- Add TypeScript support
+
+### [1.0.0]
 
 #### Added
 
