@@ -8,7 +8,7 @@ import React from 'react';
  */
 
 /**
- * Import others
+ * Other imports
  */
 
 /**
@@ -16,7 +16,7 @@ import React from 'react';
  */
 import { COMPONENT_NAMEProps, COMPONENT_NAMEDefaultProps } from './props';
 
-const COMPONENT_NAME = (props: COMPONENT_NAMEProps) => {
+const COMPONENT_NAME: React.FC<COMPONENT_NAMEProps> = (props) => {
   return <></>;
 };
 

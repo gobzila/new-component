@@ -8,26 +8,19 @@ import React from 'react';
  */
 
 /**
- * Import others
+ * Other imports
  */
 
 /**
- * Import data
+ * Import props
  */
-import { propTypes, defaultProps } from './props';
+import { COMPONENT_NAMEProps, COMPONENT_NAMEDefaultProps } from './props';
 
-/**
- * Displays the component
- */
 const COMPONENT_NAME = (props) => {
   return <></>;
 };
 
-COMPONENT_NAME.propTypes = propTypes;
-COMPONENT_NAME.defaultProps = defaultProps;
+COMPONENT_NAME.propTypes = COMPONENT_NAMEProps;
+COMPONENT_NAME.defaultProps = COMPONENT_NAMEDefaultProps;
 
 export default COMPONENT_NAME;
-export {
-  propTypes as COMPONENT_NAMEPropTypes,
-  defaultProps as COMPONENT_NAMEDefaultProps,
-};

@@ -1,16 +1,16 @@
 /**
- * Defines the data requirements for the component
+ * Define the data requirements for the component
  */
 import PropTypes from 'prop-types';
 
 /**
- * Defines the prop types
+ * Define the prop types
  */
-const propTypes = {};
+const COMPONENT_NAMEPropTypes = {};
 
 /**
- * Defines the default props
+ * Define the default props
  */
-const defaultProps = {};
+const COMPONENT_NAMEDefaultProps = {};
 
-export { propTypes, defaultProps };
+export { COMPONENT_NAMEPropTypes, COMPONENT_NAMEDefaultProps };
