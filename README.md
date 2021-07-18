@@ -1,10 +1,12 @@
-## Create a new React component
+# Create a new React component
 
-Forked from https://github.com/joshwcomeau/new-component.
+## Simple CLI interface for creating React Functional Components
 
-### Install
+#### Forked from https://github.com/joshwcomeau/new-component.
 
-#### Globally for all projects
+# Install
+
+## Globally for all projects
 
 ```bash
 # Using Yarn:
@@ -14,7 +16,7 @@ $ yarn global add @gobzila/new-component
 $ npm i -g @gobzila/new-component
 ```
 
-#### Locally for a specific project
+## Locally for a specific project
 
 ```bash
 # Using Yarn:
@@ -24,57 +26,50 @@ $ yarn add @gobzila/new-component
 $ npm i @gobzila/new-component
 ```
 
-### Usage
+# Quickstart
+## Usage
 
 ```bash
 $ cd PROJECT_DIRECTORY
-$ new-component TestComponent
+$ new-component MyComponent
 ```
 
-### What you'll get
+## What you'll get
 
-In `src/components/TestComponent`:
+In `src/components/MyComponent`:
 
 ```Javascript
-// `TestComponent/TestComponent.js`
+// `MyComponent/MyComponent.js`
 /**
  * Absolute imports
  */
 import React from 'react';
 
 /**
- * Import other components and hooks
+ * Import components and hooks
  */
 
 /**
- * Import others
+ * Other imports
  */
 
 /**
- * Import data
+ * Import props
  */
-import { propTypes, defaultProps } from './data';
+import { MyComponentProps, MyComponentDefaultProps } from './props';
 
-/**
- * Displays the component
- */
-const TestComponent = (props) => {
+const MyComponent = props => {
   return <></>;
 };
 
-TestComponent.propTypes = propTypes;
-TestComponent.defaultProps = defaultProps;
+MyComponent.propTypes = MyComponentProps;
+MyComponent.defaultProps = MyComponentDefaultProps;
 
-export default TestComponent;
-export {
-  propTypes as TestComponentPropTypes,
-  defaultProps as TestComponentDefaultProps,
-};
-
+export default MyComponent;
 ```
 
 ```Javascript
-// `TestComponent/data.js`
+// `MyComponent/props.js`
 /**
  * Defines the data requirements for the component
  */
@@ -83,23 +78,82 @@ import PropTypes from 'prop-types';
 /**
  * Defines the prop types
  */
-const propTypes = {};
+const MyComponentPropTypes = {};
 
 /**
  * Defines the default props
  */
-const defaultProps = {};
+const MyComponentDefaultProps = {};
 
-export { propTypes, defaultProps };
-
+export { MyComponentPropTypes, MyComponentDefaultProps };
 ```
 
 ```Javascript
-// `TestComponent/index.js`
-export {
-  default,
-  TestComponentPropTypes,
-  TestComponentDefaultProps,
-} from './TestComponent';
+// `MyComponent/index.js`
+export { default } from './MyComponent';
+export { MyComponentPropTypes, MyComponentDefaultProps } from './props';
+```
 
+## Configuration
+
+### Directory
+
+- Controls the desired directory for the created component. Defaults to `src/components`.
+- Command line: `--dir <value>` or `-d <value>`.
+
+### TypeScript
+
+- Creates a React Functional Component for TypeScript project.
+- Command line: `--type-script` or `-t`.
+- What you'll get:
+
+In `src/components/MyComponent`:
+
+```TypeScript
+// `MyComponent/MyComponent.js`
+/**
+ * Absolute imports
+ */
+import React from 'react';
+
+/**
+ * Import components and hooks
+ */
+
+/**
+ * Other imports
+ */
+
+/**
+ * Import props
+ */
+import { MyComponentProps, MyComponentDefaultProps } from './props';
+
+const MyComponent: React.FC<MyComponentProps> = props => {
+  return <></>;
+};
+
+MyComponent.defaultProps = MyComponentDefaultProps;
+
+export default MyComponent;
+```
+
+```TypeScript
+// `MyComponent/props.js`
+/**
+ * MyComponent props
+ */
+export interface MyComponentProps {}
+
+/**
+ * MyComponent default props
+ */
+export const MyComponentDefaultProps = {};
+```
+
+```TypeScript
+// `MyComponent/index.js`
+export { default } from './MyComponent';
+export type { MyComponentProps } from './props';
+export { MyComponentDefaultProps } from './props';
 ```
